@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technician Chat - FixFast</title>
+  <link rel="stylesheet" href="chat-style.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">FixFast</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="repair-history.html">Repair History</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="technician-info">
+      <h1>👨‍🔧 Your Technician</h1>
+      <div class="tech-card">
+        <h2 id="techName">Loading...</h2>
+        <p><strong>Phone:</strong> <a id="techPhone" href="#">Loading...</a></p>
+        <p><strong>Expertise:</strong> <span id="techSkill">Loading...</span></p>
+        <div class="actions">
+          <button onclick="startChat()">💬 Chat</button>
+          <button onclick="callTech()">📞 Call</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <h2>📍 Live Location</h2>
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> FixFast Inc.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const technician = {
+      name: "Ravi Kumar",
+      phone: "+91-9876543210",
+      skill: "Laptop & Mobile Repair",
+      lat: 28.6139,
+      lng: 77.2090
+    };
+
+    function populateTechnicianInfo() {
+      document.getElementById("techName").textContent = technician.name;
+      document.getElementById("techPhone").textContent = technician.phone;
+      document.getElementById("techPhone").href = `tel:${technician.phone}`;
+      document.getElementById("techSkill").textContent = technician.skill;
+    }
+
+    function callTech() {
+      window.location.href = `tel:${technician.phone}`;
+    }
+
+    function startChat() {
+      alert("Chat feature is under development.");
+      // You could open a modal or redirect to a chat system here
+    }
+
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: { lat: technician.lat, lng: technician.lng }
+      });
+
+      const marker = new google.maps.Marker({
+        position: { lat: technician.lat, lng: technician.lng },
+        map,
+        title: technician.name
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      populateTechnicianInfo();
+      initMap();
+    });
+  </script>
+</body>
+</html>

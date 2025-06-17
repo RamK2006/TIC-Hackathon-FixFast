@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FixFast - Home</title>
+  <link rel="stylesheet" href="home-style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><a href="index.html">FixFast</a></div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="repair-history.html">Repair History</a></li>
+        <li><a href="book.html">Book</a></li>
+        <li><a href="technician-chat.html">Technician</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
+  </header>
+
+  <main class="container">
+    <section class="hero-images">
+      <img src="f6130c9c-6425-4efb-80d4-e20eff747e9b.png" alt="Appliance repair" />
+      <img src="https://cdn.pixabay.com/photo/2017/07/09/18/04/electrician-2480414_960_720.jpg" alt="Engineer fixing" />
+    </section>
+
+    <section class="hero-section">
+      <h1>Your Devices Fixed, Fast</h1>
+      <p>Book trusted repair technicians at your doorstep in 10 minutes.</p>
+      <a href="book.html" class="big-book-btn">📅 Book a Service</a>
+    </section>
+
+    <section class="suggest-section">
+      <h2>Popular Suggestions</h2>
+      <div id="popularSuggestions" class="button-list"></div>
+    </section>
+
+    <section class="recent-section">
+      <h2>Recent Services</h2>
+      <div id="recentServices" class="button-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> FixFast Inc.</p>
+    <div class="slogans">
+      <p>“Fix it Fast, Fix it Right!”</p>
+      <p>“10-Minute Tech at Your Doorstep”</p>
+      <p>“We Bring Repair to You”</p>
+    </div>
+  </footer>
+
+  <script src="home-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+/* Reset & Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Navbar */
+.navbar {
+  background: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #1f4e79;
+}
+
+.nav-links li {
+  display: inline;
+  margin: 0 15px;
+}
+
+/* Hero Section */
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cta-button {
+  background: #fff;
+  color: #007bff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: #e0e0e0;
+}
+
+/* Features Section */
+.features {
+  padding: 3rem 2rem;
+  background: #fff;
+}
+
+.features h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.feature {
+  background: #f0f4f8;
+  padding: 1.5rem;
+  border-radius: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.feature:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* How it Works */
+.how-it-works {
+  padding: 3rem 2rem;
+  background: #f9fafc;
+}
+
+.how-it-works h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.how-it-works ol {
+  max-width: 600px;
+  margin: auto;
+  padding-left: 1.2rem;
+  font-size: 1.1rem;
+}
+
+/* Plans */
+.plans {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #fff;
+}
+
+.plans p {
+  margin: 1rem 0;
+}
+
+/* Footer */
+footer {
+  background: #1f4e79;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: 2rem;
+}
+
+.footer-links a {
+  color: #cfe2ff;
+  margin: 0 10px;
+}
+.features,
+.how-it-works,
+.plans {
+  margin-bottom: 3rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature {
+  background: #ffffff;
+  border-left: 5px solid #007bff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.how-it-works ol {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.plans .cta-button {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.plans .cta-button:hover {
+  background-color: #005bb5;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+header.topbar {
+  background: #1f4e79;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.nav-links li a {
+  color: #cfe2ff;
+}
+
+.nav-toggle-label {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Responsive Nav */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    background: #1f4e79;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    display: none;
+  }
+  .nav-toggle:checked + nav .nav-links {
+    display: flex;
+  }
+  .nav-toggle-label {
+    display: block;
+  }
+}
+
+/* Buttons */
+.service-button {
+  background: #007bff;
+  border: none;
+  color: white;
+  padding: 0.7rem 1.2rem;
+  margin: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.service-button:hover {
+  background: #005bb5;
+}
+
+.button-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* Footer */
+footer {
+  background: #1f4e79;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+.slogans p {
+  font-style: italic;
+  margin: 0.3rem 0;
+}
+.slogans {
+  margin-top: 1rem;
+}
+.center-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-options, .auth-form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-btn, .auth-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.auth-btn:hover, .auth-form button:hover {
+  background: #005bb5;
+}
+.hero-section {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.hero-section h1 {
+  font-size: 2rem;
+  color: #1f4e79;
+}
+
+.hero-section p {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.big-book-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background: #28a745;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.big-book-btn:hover {
+  background: #218838;
+}
+/* General Page Layout */
+body, html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background: #f4f6f9;
+  color: #333;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.container {
+  flex: 1 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+header.topbar {
+  background: #1f4e79;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
+.nav-links a {
+  color: #cfe2ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Hero Images Section */
+.hero-images {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.hero-images img {
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Hero Booking */
+.hero-section {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.big-book-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background: #28a745;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.big-book-btn:hover {
+  background: #218838;
+}
+
+/* Buttons */
+.button-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 2.5rem;
+  justify-content: center;
+}
+
+.service-button {
+  background: #007bff;
+  color: white;
+  padding: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, background 0.3s ease;
+  width: 100%;
+}
+
+.service-button:hover {
+  background: #005bb5;
+  transform: scale(1.03);
+}
+.service-button:active {
+  transform: scale(0.98);
+}
+
+/* Centered Page Content */
+.center-page {    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Footer Fixed to Bottom */
+footer {
+  flex-shrink: 0;
+  background: #1f4e79;
+  color: white;
+  text-align: center;
+  padding: 1.2rem 1rem;
+  margin-top: auto;
+}
+
+.slogans p {
+  font-style: italic;
+  margin: 0.3rem 0;
+}
+
+/* Responsive Nav (optional) */
+.nav-toggle-label {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+.nav-toggle {
+  display: none;
+}
+.tech-card {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 5px solid #007bff;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.technician-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.technician-info h2 {
+  margin-bottom: 0.5rem;
+  color: #1f4e79;
+}

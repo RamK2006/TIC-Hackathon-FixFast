@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FixFast - Signup</title>
+  <link rel="stylesheet" href="home-style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><a href="index.html">FixFast</a></div>
+  </header>
+
+  <main class="container">
+    <h2>Create an Account</h2>
+    <form id="signupForm" class="auth-form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required />
+
+      <label for="address">Address</label>
+      <textarea id="address" required></textarea>
+
+      <label for="aadhar">Aadhar Number</label>
+      <input type="text" id="aadhar" maxlength="12" pattern="\\d{12}" required />
+
+      <button type="submit">Verify & Register</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> FixFast Inc.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.getElementById("signupForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const address = document.getElementById("address").value;
+      const aadhar = document.getElementById("aadhar").value;
+
+      if (!/^[0-9]{12}$/.test(aadhar)) {
+        alert("Please enter a valid 12-digit Aadhar number.");
+        return;
+      }
+
+      const res = await fetch("http://localhost:5000/api/users/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, address, aadhar })
+      });
+
+      if (res.ok) {
+        alert("Successfully verified and registered!");
+        window.location.href = "login.html";
+      } else {
+        alert("Aadhar verification failed or already registered.");
+      }
+    });
+  </script>
+</body>
+</html>

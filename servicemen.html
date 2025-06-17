@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Select Technician</title>
+  <link rel="stylesheet" href="home-style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><a href="index.html">FixFast</a></div>
+  </header>
+
+  <main class="container">
+    <h2>Suggested Technicians</h2>
+    <div id="techList" class="technician-grid"></div>
+  </main>
+
+  <script>
+    const servicemen = [
+      { name: "Ravi Sharma", skill: "AC, Fridge", rating: 4.5, phone: "9876543210", id: "tech1", lat: 28.61, lng: 77.20 },
+      { name: "Anita Verma", skill: "Mobile, Laptop", rating: 4.8, phone: "9123456780", id: "tech2", lat: 28.63, lng: 77.18 }
+    ];
+
+    const issue = JSON.parse(sessionStorage.getItem("issueData"));
+
+    const container = document.getElementById("techList");
+    servicemen.forEach(tech => {
+      const div = document.createElement("div");
+      div.className = "tech-card";
+      div.innerHTML = `
+        <h3>${tech.name}</h3>
+        <p><strong>Expertise:</strong> ${tech.skill}</p>
+        <p>⭐ ${tech.rating}/5</p>
+        <button onclick='book("${tech.name}", "${tech.phone}", ${tech.lat}, ${tech.lng})'>Book</button>
+      `;
+      container.appendChild(div);
+    });
+
+    function book(name, phone, lat, lng) {
+      sessionStorage.setItem("technician", JSON.stringify({ name, phone, lat, lng }));
+      window.location.href = "technician-track.html";
+    }
+  </script>
+</body>
+</html>

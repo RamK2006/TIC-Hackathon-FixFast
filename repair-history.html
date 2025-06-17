@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Repair History - FixFast</title>
+  <link rel="stylesheet" href="repair-style.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">FixFast</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Settings</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="history-section">
+      <h1>🛠 Repair History</h1>
+      <ul class="timeline" id="repairTimeline">
+        <!-- Dynamic repair entries inserted here -->
+      </ul>
+    </section>
+
+    <section class="smart-suggestions">
+      <h2>🔍 Smart Suggestions</h2>
+      <div id="suggestionContainer">
+        <!-- Dynamic smart suggestions inserted here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> FixFast Inc.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    async function fetchRepairHistory() {
+      const userId = "USER123"; // Replace with dynamic auth/user session
+      const timeline = document.getElementById("repairTimeline");
+
+      try {
+        const res = await fetch(`http://localhost:5000/api/repairs?userId=${userId}`);
+        const data = await res.json();
+
+        if (data.length === 0) {
+          timeline.innerHTML = "<p>No repairs found.</p>";
+        } else {
+          data.forEach(entry => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <div class="timeline-card">
+                <h3>${entry.title}</h3>
+                <p>Date: ${entry.date}</p>
+                <p>Status: ${entry.status}</p>
+              </div>
+            `;
+            timeline.appendChild(li);
+          });
+        }
+      } catch (err) {
+        timeline.innerHTML = "<p>Error fetching repair history.</p>";
+        console.error(err);
+      }
+    }
+
+    async function fetchSmartSuggestions() {
+      const container = document.getElementById("suggestionContainer");
+      container.innerHTML = "";
+
+      // Placeholder: You can enhance logic based on actual analytics or insights
+      const suggestions = [
+        {
+          title: "Battery Health Alert ⚠️",
+          message: "Multiple battery-related issues detected. Consider full battery replacement.",
+          button: "Book Battery Replacement"
+        },
+        {
+          title: "Screen Care Tip 💡",
+          message: "Protect your recently repaired screen with a screen guard and case."
+        }
+      ];
+
+      suggestions.forEach(suggestion => {
+        const div = document.createElement("div");
+        div.className = "suggestion-card";
+        div.innerHTML = `
+          <h3>${suggestion.title}</h3>
+          <p>${suggestion.message}</p>
+          ${suggestion.button ? `<button class="cta">${suggestion.button}</button>` : ""}
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchRepairHistory();
+      fetchSmartSuggestions();
+    });
+  </script>
+</body>
+</html>

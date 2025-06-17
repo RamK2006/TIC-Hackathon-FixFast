@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FixFast - Login</title>
+  <link rel="stylesheet" href="home-style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><a href="index.html">FixFast</a></div>
+  </header>
+
+  <main class="container center-page">
+    <h2>Login to FixFast</h2>
+    <form id="loginForm" class="auth-form">
+      <label for="aadhar">Aadhar Number</label>
+      <input type="text" id="aadhar" maxlength="12" required />
+
+      <label for="role">Login As</label>
+      <select id="role" required>
+        <option value="user">Regular User</option>
+        <option value="technician">Serviceman</option>
+      </select>
+
+      <button type="submit">Login</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> FixFast Inc.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const aadhar = document.getElementById("aadhar").value;
+      const role = document.getElementById("role").value;
+
+      const res = await fetch("http://localhost:5000/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ aadhar, role })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        alert("Login successful!");
+        window.location.href = role === "technician" ? "technician-chat.html" : "index.html";
+      } else {
+        alert("Login failed. Aadhar not verified or role mismatch.");
+      }
+    });
+  </script>
+</body>
+</html>

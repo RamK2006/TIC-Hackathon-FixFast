@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Track Technician</title>
+  <link rel="stylesheet" href="home-style.css" />
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><a href="index.html">FixFast</a></div>
+  </header>
+
+  <main class="container">
+    <h2>Tracking Your Technician</h2>
+    <div id="techInfo"></div>
+    <div id="map" style="width:100%;height:400px;border-radius:10px;margin-top:1rem;"></div>
+  </main>
+
+  <script>
+    const tech = JSON.parse(sessionStorage.getItem("technician"));
+
+    document.getElementById("techInfo").innerHTML = `
+      <p><strong>Name:</strong> ${tech.name}</p>
+      <p><strong>Phone:</strong> <a href="tel:${tech.phone}">${tech.phone}</a></p>
+      <p><a href="sms:${tech.phone}">Send Message</a></p>
+    `;
+
+    function initMap() {
+      const position = { lat: tech.lat, lng: tech.lng };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: position,
+        zoom: 14
+      });
+      new google.maps.Marker({ position, map, title: tech.name });
+    }
+
+    initMap();
+  </script>
+</body>
+</html>

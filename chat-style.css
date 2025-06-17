@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f8f9fa;
+  color: #333;
+}
+
+header.topbar {
+  background: #1f4e79;
+  padding: 1rem 2rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+nav a {
+  color: #cfe2ff;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.container {
+  padding: 2rem;
+}
+
+.technician-info {
+  margin-bottom: 2rem;
+}
+
+.tech-card {
+  background: white;
+  padding: 1.5rem;
+  border-left: 6px solid #007bff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.tech-card h2 {
+  margin-top: 0;
+}
+
+.actions {
+  margin-top: 1rem;
+}
+
+.actions button {
+  background: #007bff;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.actions button:hover {
+  background: #005bb5;
+}
+
+.map-section h2 {
+  margin-bottom: 1rem;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+footer {
+  background: #1f4e79;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+footer p {
+  margin: 0;
+}

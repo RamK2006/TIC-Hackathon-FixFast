@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book a Service - FixFast</title>
+  <link rel="stylesheet" href="home-style.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><a href="index.html">FixFast</a></div>
+  </header>
+
+  <main class="container">
+    <h2>Book a Service</h2>
+    <form id="bookForm" class="auth-form">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" required />
+
+      <label for="contact">Contact Number:</label>
+      <input type="tel" id="contact" required />
+
+      <label for="appliance">Appliance:</label>
+      <input type="text" id="appliance" required />
+
+      <label for="problem">Problem Description:</label>
+      <textarea id="problem" rows="4" required></textarea>
+
+      <button type="submit">Find a Technician</button>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById("bookForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const appliance = document.getElementById("appliance").value;
+      const problem = document.getElementById("problem").value;
+
+      // Store in localStorage or pass through URL
+      sessionStorage.setItem("issueData", JSON.stringify({ appliance, problem }));
+      window.location.href = "servicemen.html";
+    });
+  </script>
+</body>
+</html>
