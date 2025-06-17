@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - FixFast</title>
+  <link rel="stylesheet" href="payment-style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">FixFast</div>
+    <nav><a href="index.html">Home</a></nav>
+  </header>
+
+  <main class="container">
+    <h1>💳 Make Payment</h1>
+    <div class="payment-card" id="technicianInfo">
+      <!-- Technician details here -->
+    </div>
+
+    <form id="paymentForm">
+      <label for="method">Payment Method:</label>
+      <select id="method" required>
+        <option value="">Choose</option>
+        <option>UPI</option>
+        <option>Credit Card</option>
+        <option>Cash</option>
+      </select>
+
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" value="499" required />
+
+      <button type="submit">Confirm Payment</button>
+    </form>
+  </main>
+
+  <script>
+    const technicians = {
+      1: { name: "Ravi Kumar", skill: "Mobile Repair", phone: "+91-9876543210" },
+      2: { name: "Anita Singh", skill: "Laptop Repair", phone: "+91-9988776655" }
+    };
+
+    const techId = localStorage.getItem("hiredTechnicianId");
+    const info = technicians[techId];
+
+    if (info) {
+      document.getElementById("technicianInfo").innerHTML = `
+        <h3>Technician: ${info.name}</h3>
+        <p>Expertise: ${info.skill}</p>
+        <p>Phone: <a href="tel:${info.phone}">${info.phone}</a></p>
+      `;
+    }
+
+    document.getElementById("paymentForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Payment Successful. Technician will arrive soon.");
+      window.location.href = "technician-chat.html";
+    });
+  </script>
+</body>
+</html>

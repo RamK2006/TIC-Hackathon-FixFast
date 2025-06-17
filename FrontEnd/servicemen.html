@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Select Technician</title>
-  <link rel="stylesheet" href="home-style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Servicemen - FixFast</title>
+  <link rel="stylesheet" href="servicemen-style.css">
 </head>
 <body>
   <header class="topbar">
-    <div class="logo"><a href="index.html">FixFast</a></div>
+    <div class="logo">FixFast</div>
+    <nav>
+      <a href="index.html">Home</a>
+    </nav>
   </header>
 
   <main class="container">
-    <h2>Suggested Technicians</h2>
-    <div id="techList" class="technician-grid"></div>
+    <h1>👨‍🔧 Available Servicemen</h1>
+    <div class="servicemen-list" id="servicemenList">
+      <!-- Technicians will be dynamically loaded here -->
+    </div>
   </main>
 
   <script>
     const servicemen = [
-      { name: "Ravi Sharma", skill: "AC, Fridge", rating: 4.5, phone: "9876543210", id: "tech1", lat: 28.61, lng: 77.20 },
-      { name: "Anita Verma", skill: "Mobile, Laptop", rating: 4.8, phone: "9123456780", id: "tech2", lat: 28.63, lng: 77.18 }
+      { id: 1, name: "Ravi Kumar", rating: 4.8, skill: "Mobile Repair", location: "Delhi" },
+      { id: 2, name: "Anita Singh", rating: 4.9, skill: "Laptop Repair", location: "Bangalore" }
     ];
 
-    const issue = JSON.parse(sessionStorage.getItem("issueData"));
-
-    const container = document.getElementById("techList");
-    servicemen.forEach(tech => {
-      const div = document.createElement("div");
-      div.className = "tech-card";
-      div.innerHTML = `
-        <h3>${tech.name}</h3>
-        <p><strong>Expertise:</strong> ${tech.skill}</p>
-        <p>⭐ ${tech.rating}/5</p>
-        <button onclick='book("${tech.name}", "${tech.phone}", ${tech.lat}, ${tech.lng})'>Book</button>
-      `;
-      container.appendChild(div);
-    });
-
-    function book(name, phone, lat, lng) {
-      sessionStorage.setItem("technician", JSON.stringify({ name, phone, lat, lng }));
-      window.location.href = "technician-track.html";
+    function loadServicemen() {
+      const list = document.getElementById('servicemenList');
+      servicemen.forEach(tech => {
+        const card = document.createElement('div');
+        card.className = "tech-card";
+        card.innerHTML = `
+          <h3>${tech.name}</h3>
+          <p>⭐ Rating: ${tech.rating}</p>
+          <p>Expertise: ${tech.skill}</p>
+          <p>Location: ${tech.location}</p>
+          <button onclick="hire(${tech.id})">Hire Now</button>
+        `;
+        list.appendChild(card);
+      });
     }
+
+    function hire(id) {
+      localStorage.setItem("hiredTechnicianId", id);
+      window.location.href = "payment.html";
+    }
+
+    window.onload = loadServicemen;
   </script>
 </body>
 </html>
