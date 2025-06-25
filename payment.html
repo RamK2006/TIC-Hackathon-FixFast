@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payment - FixFast</title>
-  <link rel="stylesheet" href="payment-style.css">
+  <link rel="stylesheet" href="payment-style.css" />
 </head>
 <body>
   <header class="topbar">
@@ -15,46 +15,69 @@
   <main class="container">
     <h1>💳 Make Payment</h1>
     <div class="payment-card" id="technicianInfo">
-      <!-- Technician details here -->
+      <!-- Technician info will appear here -->
     </div>
 
     <form id="paymentForm">
       <label for="method">Payment Method:</label>
       <select id="method" required>
         <option value="">Choose</option>
-        <option>UPI</option>
-        <option>Credit Card</option>
-        <option>Cash</option>
+        <option value="cash">Cash at Point</option>
+        <option value="upi">Pay via UPI</option>
       </select>
 
       <label for="amount">Amount:</label>
-      <input type="number" id="amount" value="499" required />
+      <input type="number" id="amount" value="499" readonly required />
 
       <button type="submit">Confirm Payment</button>
     </form>
   </main>
 
   <script>
-    const technicians = {
-      1: { name: "Ravi Kumar", skill: "Mobile Repair", phone: "+91-9876543210" },
-      2: { name: "Anita Singh", skill: "Laptop Repair", phone: "+91-9988776655" }
-    };
+    const tech = JSON.parse(localStorage.getItem("hiredTechnician"));
+    const userPhone = localStorage.getItem("verifiedPhone");
 
-    const techId = localStorage.getItem("hiredTechnicianId");
-    const info = technicians[techId];
-
-    if (info) {
-      document.getElementById("technicianInfo").innerHTML = `
-        <h3>Technician: ${info.name}</h3>
-        <p>Expertise: ${info.skill}</p>
-        <p>Phone: <a href="tel:${info.phone}">${info.phone}</a></p>
-      `;
+    if (!tech || !userPhone) {
+      alert("Missing technician or user info. Please go back and try again.");
+      window.location.href = "servicemen.html";
     }
 
-    document.getElementById("paymentForm").addEventListener("submit", function(e) {
+    document.getElementById("technicianInfo").innerHTML = `
+      <h3>Technician: ${tech.name}</h3>
+      <p>Expertise: ${tech.skill || 'General Technician'}</p>
+      <p>Phone: <a href="tel:${tech.phone}">${tech.phone}</a></p>
+    `;
+
+    document.getElementById("paymentForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      alert("Payment Successful. Technician will arrive soon.");
-      window.location.href = "technician-chat.html";
+      const method = document.getElementById("method").value;
+
+      const bookingData = {
+        userPhone,
+        technicianId: tech._id,
+        technicianName: tech.name,
+        paymentMethod: method
+      };
+
+      try {
+        const res = await fetch("http://localhost:5000/api/bookings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bookingData)
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem("bookingId", data.booking._id);
+          alert("Booking created! Awaiting technician confirmation.");
+          window.location.href = "technician-chat.html";
+        } else {
+          alert("Booking failed. Try again.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Error occurred. Please try again.");
+      }
     });
   </script>
 </body>

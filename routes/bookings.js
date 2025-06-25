@@ -1,14 +1,35 @@
-const express = require('express');
-const jwt = require('express-jwt');
-const Technician = require('../models/Technician');
+const express = require("express");
 const router = express.Router();
+const Booking = require("../models/Booking");
 
-router.post('/', jwt({ secret: process.env.AUTH_SECRET, algorithms: ['HS256'] }), async (req, res) => {
-  const { technicianId, userId } = req.body;
-  const technician = await Technician.findById(technicianId);
-  if (!technician) return res.status(404).json({ error: 'Technician not found' });
-  // Here you could create a Booking model if needed
-  res.json({ technician });
+// 📌 Create a new booking
+router.post("/", async (req, res) => {
+  const { userPhone, technicianId, technicianName, paymentMethod } = req.body;
+
+  try {
+    const newBooking = await Booking.create({
+      userPhone,
+      technicianId,
+      technicianName,
+      paymentMethod,
+      status: "pending"
+    });
+
+    res.json({ success: true, booking: newBooking });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: "Booking failed" });
+  }
+});
+
+// ✅ (Optional) Confirm booking
+router.post("/confirm/:id", async (req, res) => {
+  try {
+    await Booking.findByIdAndUpdate(req.params.id, { status: "confirmed" });
+    res.json({ success: true });
+  } catch {
+    res.status(500).json({ success: false });
+  }
 });
 
 module.exports = router;

@@ -1,15 +1,16 @@
 const express = require('express');
-const Technician = require('../models/Technician');
 const router = express.Router();
+const Serviceman = require('../models/Serviceman');
 
 router.get('/', async (req, res) => {
   try {
-    const techs = await Technician.find({ isVerified: true });
-    res.json(techs);
+    const servicemen = await Serviceman.find({ verified: true }); // Only verified
+    res.json(servicemen);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: "Failed to fetch servicemen" });
   }
 });
 
 module.exports = router;
+
 
