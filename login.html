@@ -23,12 +23,16 @@
   </main>
 
   <script>
+    // Initialize Firebase
+    // Make sure to replace the config with your Firebase project details
+    // You can find these details in your Firebase console under Project Settings
+    // Make sure to enable Phone Authentication in your Firebase console
     // Replace with your Firebase config
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT",
-      storageBucket: "YOUR_PROJECT.appspot.com",
+      apiKey: "YOUR_API_KEY",//Here needs the firebase API key
+      authDomain: "FixFast.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",//Here needs the firebase project ID
+      storageBucket: "YOUR_PROJECT.appspot.com",//Here needs the firebase storage bucket
       messagingSenderId: "XXXX",
       appId: "XXXX"
     };
@@ -62,7 +66,7 @@
         }).catch(err => alert("Verification Failed: " + err.message));
     }
   </script>
- <a href="index.html" class="floating-home-button">🏠 Home</a>
+ 
 
 
 </body>
