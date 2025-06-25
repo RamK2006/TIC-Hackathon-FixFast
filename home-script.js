@@ -36,3 +36,39 @@ document.addEventListener("DOMContentLoaded", () => {
   renderButtons(suggestions, "popularSuggestions");
   renderButtons(recent, "recentServices");
 });
+
+//new 
+document.addEventListener("DOMContentLoaded", () => {
+  const phone = localStorage.getItem("verifiedPhone");
+
+  if (phone) {
+    document.getElementById("authButtons").style.display = "none";
+    const profileDropdown = document.getElementById("profileDropdown");
+    profileDropdown.style.display = "inline-block";
+
+    const profileBtn = document.getElementById("profileBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    profileBtn.addEventListener("click", () => {
+      dropdownMenu.style.display =
+        dropdownMenu.style.display === "block" ? "none" : "block";
+    });
+
+    window.addEventListener("click", function (e) {
+      if (!profileDropdown.contains(e.target)) {
+        dropdownMenu.style.display = "none";
+      }
+    });
+  }
+});
+
+function logout() {
+  localStorage.removeItem("verifiedPhone");
+  window.location.href = "login.html";
+}
+function openChat() {
+  window.location.href = "chat.html";
+}
+function openProfile() {
+  window.location.href = "profile.html";
+}

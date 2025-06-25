@@ -1,58 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FixFast - Login</title>
-  <link rel="stylesheet" href="home-style.css" />
+  <title>FixFast Login</title>
+  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script>
+  <link rel="stylesheet" href="auth-style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="logo"><a href="index.html">FixFast</a></div>
-  </header>
+  <main class="container">
+    <h1>📱 Login with Mobile</h1>
+    <input type="tel" id="phone" placeholder="Enter your phone number" />
+    <div id="recaptcha-container"></div>
+    <button onclick="sendOTP()">Send OTP</button>
 
-  <main class="container center-page">
-    <h2>Login to FixFast</h2>
-    <form id="loginForm" class="auth-form">
-      <label for="aadhar">Aadhar Number</label>
-      <input type="text" id="aadhar" maxlength="12" required />
-
-      <label for="role">Login As</label>
-      <select id="role" required>
-        <option value="user">Regular User</option>
-        <option value="technician">Serviceman</option>
-      </select>
-
-      <button type="submit">Login</button>
-    </form>
+    <input type="text" id="otp" placeholder="Enter OTP" style="display:none;" />
+    <button onclick="verifyOTP()" id="verifyBtn" style="display:none;">Verify OTP</button>
   </main>
 
-  <footer>
-    <p>© <span id="year"></span> FixFast Inc.</p>
-  </footer>
-
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Replace with your Firebase config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "XXXX",
+      appId: "XXXX"
+    };
 
-    document.getElementById("loginForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const aadhar = document.getElementById("aadhar").value;
-      const role = document.getElementById("role").value;
+    firebase.initializeApp(firebaseConfig);
 
-      const res = await fetch("http://localhost:5000/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ aadhar, role })
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        alert("Login successful!");
-        window.location.href = role === "technician" ? "technician-chat.html" : "index.html";
-      } else {
-        alert("Login failed. Aadhar not verified or role mismatch.");
-      }
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      'size': 'normal',
+      'callback': (response) => {}
     });
+
+    function sendOTP() {
+      const phone = document.getElementById("phone").value;
+      const appVerifier = window.recaptchaVerifier;
+      firebase.auth().signInWithPhoneNumber(phone, appVerifier)
+        .then(confirmationResult => {
+          window.confirmationResult = confirmationResult;
+          document.getElementById("otp").style.display = "block";
+          document.getElementById("verifyBtn").style.display = "inline";
+          alert("OTP Sent!");
+        }).catch(err => alert("Error: " + err.message));
+    }
+
+    function verifyOTP() {
+      const code = document.getElementById("otp").value;
+      confirmationResult.confirm(code)
+        .then(result => {
+          const phone = result.user.phoneNumber;
+          localStorage.setItem("verifiedPhone", phone);
+          window.location.href = "register.html"; // Next step
+        }).catch(err => alert("Verification Failed: " + err.message));
+    }
   </script>
 </body>
 </html>

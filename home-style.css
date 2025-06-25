@@ -530,3 +530,35 @@ footer {
   margin-bottom: 0.5rem;
   color: #1f4e79;
 }
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: none;
+  list-style: none;
+  min-width: 140px;
+  z-index: 1000;
+  padding: 0.5rem 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu li {
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-menu li a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}

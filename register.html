@@ -1,30 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FixFast - Register</title>
-  <link rel="stylesheet" href="home-style.css" />
+  <title>FixFast Registration</title>
+  <link rel="stylesheet" href="auth-style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="logo"><a href="index.html">FixFast</a></div>
-  </header>
-
-  <main class="container center-page">
-    <h1>Register for FixFast</h1>
-    <div class="auth-options">
-      <a href="signup.html" class="auth-btn">New User? Sign Up</a>
-      <a href="login.html" class="auth-btn">Already Verified? Login</a>
-    </div>
+  <main class="container">
+    <h1>🔐 Complete Your Registration</h1>
+    <form id="registerForm">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="text" id="email" placeholder="Email" required />
+      <input type="text" id="location" placeholder="City/Location" required />
+      <select id="role">
+        <option value="user">Regular User</option>
+        <option value="serviceman">Serviceman</option>
+      </select>
+      <button type="submit">Register</button>
+    </form>
   </main>
 
-  <footer>
-    <p>© <span id="year"></span> FixFast Inc.</p>
-  </footer>
-
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("registerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        location: document.getElementById("location").value,
+        phone: localStorage.getItem("verifiedPhone"),
+        role: document.getElementById("role").value
+      };
+
+      const res = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      if (result.success) {
+        alert("Registered successfully!");
+        window.location.href = "index.html";
+      } else {
+        alert("Registration failed.");
+      }
+    });
   </script>
 </body>
 </html>
