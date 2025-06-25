@@ -7,17 +7,18 @@
 </head>
 <body>
   <header class="topbar">
-  <a href="index.html">🏠 Back to Home</a>
-</header>
-  
+    <a href="index.html">🏠Home</a>
+  </header>
+
   <main class="container">
-    <h1>🔐 Complete Your Registration</h1>
-    <form id="registerForm">
-      <input type="text" id="name" placeholder="Full Name" required />
-      <input type="text" id="email" placeholder="Email" required />
-      <input type="text" id="location" placeholder="City/Location" required />
-      <select id="role">
-        <option value="user">Regular User</option>
+    <h1>Register</h1>
+    <form>
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="text" placeholder="City" required />
+      <select required>
+        <option value="">Select Role</option>
+        <option value="user">User</option>
         <option value="serviceman">Serviceman</option>
       </select>
       <button type="submit">Register</button>
