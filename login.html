@@ -4,9 +4,14 @@
   <title>FixFast Login</title>
   <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script>
-  <link rel="stylesheet" href="auth-style.css">
+  <link rel="stylesheet" href="login-style.css" />
+
 </head>
 <body>
+  <header class="topbar">
+  <a href="index.html">🏠 Back to Home</a>
+</header>
+
   <main class="container">
     <h1>📱 Login with Mobile</h1>
     <input type="tel" id="phone" placeholder="Enter your phone number" />
@@ -57,5 +62,8 @@
         }).catch(err => alert("Verification Failed: " + err.message));
     }
   </script>
+ <a href="index.html" class="floating-home-button">🏠 Home</a>
+
+
 </body>
 </html>
